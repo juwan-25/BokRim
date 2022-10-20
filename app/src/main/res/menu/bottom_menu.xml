@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tap_history"
+        android:enabled="true"
+        android:icon="@drawable/ic_history_non"
+        android:iconTint="@color/menu_nonselect_color"
+        android:title="역사"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/tap_map"
+        android:enabled="true"
+        android:icon="@drawable/ic_mark_non"
+        android:iconTint="@color/menu_nonselect_color"
+        android:title="지도"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/tap_benefit"
+        android:enabled="true"
+        android:icon="@drawable/ic_heart_non"
+        android:iconTint="@color/menu_nonselect_color"
+        android:title="혜택"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/tap_closet"
+        android:enabled="true"
+        android:icon="@drawable/ic_closet_non"
+        android:iconTint="@color/menu_nonselect_color"
+        android:title="가상옷장"
+        app:showAsAction="always"
+        />
+</menu>
