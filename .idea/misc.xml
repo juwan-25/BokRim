@@ -8,7 +8,10 @@
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_closet.xml" value="0.1" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_closet2.xml" value="0.1" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_history.xml" value="0.1" />
-        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_map.xml" value="0.1" />
+        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_map.xml" value="0.4" />
+        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_map_parent.xml" value="0.223731884057971" />
+        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_map_search.xml" value="0.223731884057971" />
+        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/listview_item.xml" value="0.536" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/menu/menu_bottom.xml" value="0.1" />
       </map>
@@ -23,7 +26,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.2" />
+        <option name="scale" value="0.4" />
       </ProjectState>
     </option>
   </component>

@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-public class HistoryFragment extends Fragment {
-    public HistoryFragment() {}
+public class MapSearchFragment extends Fragment {
+    public MapSearchFragment() {}
 
+    public static MapSearchFragment newInstance() {
+        return new MapSearchFragment();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_benefit, container, false);
-        return v;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_map_search, container, false);
     }
 }

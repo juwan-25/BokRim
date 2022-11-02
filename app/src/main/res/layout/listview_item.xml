@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--검색어 입력 리스트뷰 목록에 뜰 layout-->
+
+    <ImageView
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:src="@drawable/ic_heart_on"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        >
+        <TextView
+            android:id="@+id/text_store_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="가게 이름"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/text_store_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="가게 위치"
+            android:textSize="13dp"
+            android:textColor="#8F000000" />
+    </LinearLayout>
+
+</LinearLayout>
