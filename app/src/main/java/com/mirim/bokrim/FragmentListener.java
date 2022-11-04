@@ -4,4 +4,6 @@ package com.mirim.bokrim;
 //MainActivity에서 구현
 public interface FragmentListener {
     public void onCommand(int index, String data);
+
+    //0: 가게 아이디
 }

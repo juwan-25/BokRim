@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,10 +49,86 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map_parent, container, false);
 
-        //즐겨찾기 ListView 화면으로 이동
+        //ListView 화면으로 이동
         Fragment fg = MapSearchFragment.newInstance();
         setChildFragment(fg);
 
+        editSearch = v.findViewById(R.id.editTextFilter);
+        toolSearch = v.findViewById(R.id.toolbar_search);
+        imgSearch = v.findViewById(R.id.img_search_icon);
+        btnListCheck = v.findViewById(R.id.btn_listview_check);
+
+        //리스트뷰(자식 프래그먼트)에서 아이템 클릭
+        btnListCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                keyBordHide();
+
+                // TODO : Listview 아이템 클릭시 화면 이동
+                //지도 검색 결과 프래그먼트로 이동
+                Log.d("리스트뷰", "아이템 클릭");
+//                Fragment fg = ChildMapFragment.newInstance();
+                setChildFragment(fg);
+
+//                //검색 아이콘 => X 아이콘
+//                imgSearch.setImageResource(R.drawable.x);
+//                imgSearch.setTag("x");
+
+                //키보드 숨기기
+                keyBordHide();
+            }
+        });
+
+        //검색어 클릭
+        editSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //즐겨찾기 ListView 화면으로 이동
+                Fragment fg = MapSearchFragment.newInstance();
+                setChildFragment(fg);
+            }
+        });
+
+        //검색어 입력시
+        editSearch.addTextChangedListener(new TextWatcher() {
+            MapSearchFragment mapSearchFragment = new MapSearchFragment();
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d("텍스트 입력", "도대체");
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("텍스트 입력", "언제");
+                fragmentListener.onCommand(0, editSearch.getText().toString());
+                mapSearchFragment.isSearch(true);
+                setChildFragment(fg);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d("텍스트 입력", "실행될래");
+                //검색어값 다른 프래그먼트로 이동
+                fragmentListener.onCommand(0, editSearch.getText().toString());
+                mapSearchFragment.isSearch(true);
+                setChildFragment(fg);
+
+            }
+        });
+
+        //검색어 입력 후 키보드의 완료 버튼 눌렀을때
+        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                if(actionId == EditorInfo.IME_ACTION_DONE)
+                {
+//                    imgSearch.setImageResource(R.drawable.x); //검색창 아이콘 이미지 변경
+                    keyBordHide(); //키보드 숨기기
+                    return true;
+                }
+                return false;
+            }
+        });
 
         return v;
     }

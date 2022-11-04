@@ -19,12 +19,14 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.security.MessageDigest;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentListener {
 
     HistoryFragment historyFragment = new HistoryFragment();
     MapFragment mapFragment = new MapFragment();
     BenefitFragment benefitFragment = new BenefitFragment();
     ClosetFragment closetFragment = new ClosetFragment();
+
+    MapSearchFragment mapSearchFragment = new MapSearchFragment();
     
     FragmentTransaction transaction;
 
@@ -78,8 +80,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Hash key", something);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             Log.e("name not found", e.toString());
+        }
+    }
+
+    @Override
+    public void onCommand(int index, String data) {
+        switch (index){
+            case 0: // MapParentFragment =>
+                mapSearchFragment.displayMessage(data);
+                break;
         }
     }
 }

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:inputType="textPersonName"
-                android:hint="장소, 브랜드, 상품 종류 검색"
+                android:hint="가게 이름, 위치 검색"
                 android:textSize="17dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"

@@ -1,6 +1,7 @@
 package com.mirim.ListView;
 
-public class ListViewItem {
+public class ListViewSearchItem {
+    //TODO: ImageView 추가
     private String name;
     private String location ;
     private int id;

@@ -13,12 +13,12 @@ import com.mirim.bokrim.R;
 
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter implements Filterable {
-    public ListViewAdapter() {
+public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
+    public ListViewSearchAdapter() {
     }
 
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>(); //원본 데이터 리스트
-    private ArrayList<ListViewItem> filteredItemList = listViewItemList; //필터링 데이터 리스트
+    private ArrayList<ListViewSearchItem> listViewItemList = new ArrayList<ListViewSearchItem>(); //원본 데이터 리스트
+    private ArrayList<ListViewSearchItem> filteredItemList = listViewItemList; //필터링 데이터 리스트
     Filter listFilter;
 
     //BaseAdapter
@@ -30,7 +30,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         // listview_item.xml ==inflate==> convertView 참조 획득
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item, parent, false);
+            convertView = inflater.inflate(R.layout.listview_search_item, parent, false);
         }
 
         // 화면에 표시될 View으로부터 위젯에 대한 참조 획득
@@ -38,7 +38,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         TextView sLoctText = (TextView) convertView.findViewById(R.id.text_store_location);
 
         // Data Set(filteredItemList)에서 position에 위치한 데이터 참조 획득
-        ListViewItem listViewItem = filteredItemList.get(position);
+        ListViewSearchItem listViewItem = filteredItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         sNameText.setText(listViewItem.getTitle());
@@ -58,7 +58,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
 
     // 데이터 추가
     public void addItem(String name, String location, int id) {
-        ListViewItem item = new ListViewItem();
+        ListViewSearchItem item = new ListViewSearchItem();
 
         item.setTitle(name);
         item.setDesc(location);
@@ -83,9 +83,9 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
                 results.values = listViewItemList;
                 results.count = listViewItemList.size();
             } else {
-                ArrayList<ListViewItem> itemList = new ArrayList<ListViewItem>();
+                ArrayList<ListViewSearchItem> itemList = new ArrayList<ListViewSearchItem>();
 
-                for (ListViewItem item : listViewItemList) {
+                for (ListViewSearchItem item : listViewItemList) {
                     if (item.getTitle().toUpperCase().contains(constraint.toString().toUpperCase()) ||
                             item.getDesc().toUpperCase().contains(constraint.toString().toUpperCase())) {
                         itemList.add(item);
@@ -102,7 +102,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
-            filteredItemList = (ArrayList<ListViewItem>) results.values;
+            filteredItemList = (ArrayList<ListViewSearchItem>) results.values;
 
             if (results.count > 0) {
                 notifyDataSetChanged();
