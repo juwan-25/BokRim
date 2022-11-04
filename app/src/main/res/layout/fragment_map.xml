@@ -109,11 +109,71 @@
         </LinearLayout>
 
         <!-- 스크롤 해서 보여줄 부분은 listview 또는 custom listview 또는 recyclerview를 사용 -->
-        <ListView
-            android:id="@+id/list_map"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp">
-        </ListView>
+            android:layout_height="match_parent">
+
+            <!--ListView - 가게 리스트-->
+            <ListView
+                android:id="@+id/list_map"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+            </ListView>
+
+            <!--ListView Item 클릭시 - 가게 상세 정보-->
+            <FrameLayout
+                android:id="@+id/linear_result"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:text="구르미 한복"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서울 종로구 효자로 5 1층"
+                        android:textSize="16dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="매주 화요일 휴무"
+                        android:textSize="16dp"
+                        />
+                </LinearLayout>
+
+                <!--TODO: 되돌아가기 버튼 고정-->
+                <FrameLayout
+                    android:id="@+id/frame_btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/ic_back_bg"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/ic_back"/>
+                </FrameLayout>
+            </FrameLayout>
+        </FrameLayout>
+
 
     </LinearLayout>
 

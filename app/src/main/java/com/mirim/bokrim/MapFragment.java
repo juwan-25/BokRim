@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.mirim.ListView.ListViewMapAdapter;
@@ -18,6 +20,8 @@ public class MapFragment extends Fragment {
     public MapFragment() {}
 
     ListView listData; // 가게 정보들 보이는 리스트뷰
+    FrameLayout frameResult;
+    FrameLayout frameBtnBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,6 @@ public class MapFragment extends Fragment {
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
-        // TODO: 리스트뷰 아이템 온클릭
         //리스트뷰 연결
         ListViewMapAdapter adapter = new ListViewMapAdapter();
         listData = v.findViewById(R.id.list_map);
@@ -43,6 +46,24 @@ public class MapFragment extends Fragment {
         // TODO: 실제 가게 정보 입력
         adapter.addItem("첫번째 가게", "첫번째 주소", 0);
         adapter.addItem("두번째 가게", "두번째 주소", 1);
+
+        // TODO: 리스트뷰 아이템 온클릭
+        frameResult = v.findViewById(R.id.linear_result);
+        listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                changeDragView(true);
+            }
+        });
+
+        // 되돌아가기 버튼
+        frameBtnBack = v.findViewById(R.id.frame_btn_back);
+        frameBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeDragView(false);
+            }
+        });
 
         //검색어 입력하기 전 자식 Fragment 이동
         EditText editSearch = v.findViewById(R.id.editTextFilter);
@@ -60,5 +81,15 @@ public class MapFragment extends Fragment {
         });
 
         return v;
+    }
+
+    public void changeDragView(boolean b){
+        if(b){ //가게 상세 정보: true
+            frameResult.setVisibility(View.VISIBLE);
+            listData.setVisibility(View.INVISIBLE);
+        }else{ //리스트뷰: false
+            frameResult.setVisibility(View.INVISIBLE);
+            listData.setVisibility(View.VISIBLE);
+        }
     }
 }
