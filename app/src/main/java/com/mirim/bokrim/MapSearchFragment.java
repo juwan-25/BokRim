@@ -87,11 +87,13 @@ public class MapSearchFragment extends Fragment {
                 ListViewSearchItem obj = (ListViewSearchItem) parent.getAdapter().getItem(position);
                 storeId = obj.getId();
 
+                Log.d("슬라이딩", "올라오세유");
+
+
                 // 가게 아이디 다른 프래그먼트로 보내고
                 fragmentListener.onCommand(1, Integer.toString(storeId));
                 // 검색 결과 프래그먼트로 이동
-                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance());
-//                MapParentFragment.btnListCheck.performClick();
+                MapParentFragment.btnListCheck.performClick();
             }
         });
 

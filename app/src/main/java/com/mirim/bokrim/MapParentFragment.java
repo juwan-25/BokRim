@@ -23,6 +23,8 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.Map;
+
 public class MapParentFragment extends Fragment implements View.OnClickListener {
     // 검색창 + 자식 프래그먼트 띄우는 창
     // 으로 구성되어있음
@@ -32,7 +34,7 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
     public static EditText editSearch; //검색어
     Toolbar toolSearch; //검색창
     ImageButton imgSearch; //검색창 아이콘
-    public static Button btnListCheck, btnFavoriteCheck; //다른 자식 프래그먼트로 이동. 자식 프래그먼트에서 호출하는 용도
+    public static Button btnListCheck; //다른 자식 프래그먼트로 이동. 자식 프래그먼트에서 호출하는 용도
     public static int storeId; //가게 아이디
 
     public static MapParentFragment newInstance() {
@@ -64,14 +66,11 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
             public void onClick(View v) {
                 keyBordHide();
 
-                // TODO : Listview 아이템 클릭시 화면 이동
                 //지도 검색 결과 프래그먼트로 이동
                 Log.d("리스트뷰", "아이템 클릭");
+                MapFragment.isSlidingDown = false;
+                MapFragment.isDragList = false;
                 ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance());
-
-//                //검색 아이콘 => X 아이콘
-//                imgSearch.setImageResource(R.drawable.x);
-//                imgSearch.setTag("x");
 
                 keyBordHide();
             }
@@ -107,7 +106,6 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
                 fragmentListener.onCommand(0, editSearch.getText().toString());
                 mapSearchFragment.isSearch(true);
                 setChildFragment(fg);
-
             }
         });
 
@@ -163,6 +161,7 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
 
     //키보드 숨기기
     void keyBordHide() {
+        Log.d("키보드", "숨겨유");
         Window window = getActivity().getWindow();
         new WindowInsetsControllerCompat(window, window.getDecorView()).hide(WindowInsetsCompat.Type.ime());
     }

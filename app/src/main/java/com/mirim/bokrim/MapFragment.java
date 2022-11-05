@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +18,24 @@ import android.widget.TextView;
 import com.mirim.bokrim.Datas.Store;
 import com.mirim.bokrim.Datas.StoreList;
 import com.mirim.bokrim.ListView.ListViewMapAdapter;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import net.daum.mf.map.api.MapView;
 
 public class MapFragment extends Fragment {
     public MapFragment() {}
 
-    ListView listData; // 가게 정보들 보이는 리스트뷰
+    static SlidingUpPanelLayout slidingUpPanelLayout; // 슬라이딩 레이아웃
+
+    static ListView listData; // 가게 정보들 보이는 리스트뷰
+
+    static LinearLayout linearResult; // 가게 상세 정보 페이지
+    FrameLayout frameBtnBack; // 되돌아가기 버튼
 
     TextView textStoreName, textStoreAdd; // 가게 상세 정보
 
-    LinearLayout linearResult; // 가게 상세 정보 페이지
-    FrameLayout frameBtnBack; // 되돌아가기 버튼
+    public static boolean isSlidingDown = true;
+    public static boolean isDragList = true;
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -44,7 +51,29 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
 
+        listData = v.findViewById(R.id.list_map);
+        slidingUpPanelLayout = v.findViewById(R.id.sliding_layout);
+
+        textStoreName = v.findViewById(R.id.text_store_name);
+        textStoreAdd = v.findViewById(R.id.text_store_address);
+
+        linearResult = v.findViewById(R.id.linear_result);
+        frameBtnBack = v.findViewById(R.id.frame_btn_back);
+
+        EditText editSearch = v.findViewById(R.id.editTextFilter);
+
+        Log.d("드래그뷰 슬라이딩", "MapFragment 입성!!!");
+        // 슬라이딩 레이아웃
+        Log.d("슬라이딩", "올라오라고 햇는디 그랫는디"+slidingUpPanelLayout.getPanelState());
+        if(isSlidingDown) slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        if(isDragList){
+            listData.setVisibility(View.VISIBLE);
+            linearResult.setVisibility(View.INVISIBLE);
+            frameBtnBack.setVisibility(View.INVISIBLE);
+        }
+
         //카카오맵
+        // TODO : 프래그먼트 닫힐때마다 지도 지워주기
         MapView mapView = new MapView(getContext());
 
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
@@ -52,7 +81,6 @@ public class MapFragment extends Fragment {
 
         //리스트뷰 연결
         ListViewMapAdapter adapter = new ListViewMapAdapter();
-        listData = v.findViewById(R.id.list_map);
         listData.setAdapter(adapter);
 
         // TODO: 실제 가게 정보 입력
@@ -60,12 +88,7 @@ public class MapFragment extends Fragment {
             adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
 
 
-        // 가게 상세 정보 페이지
-        textStoreName = v.findViewById(R.id.text_store_name);
-        textStoreAdd = v.findViewById(R.id.text_store_address);
-
         // TODO: 리스트뷰 아이템 온클릭 xml 전환 전 ripple 나타나게 하기
-        linearResult = v.findViewById(R.id.linear_result);
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,8 +104,9 @@ public class MapFragment extends Fragment {
             }
         });
 
+        Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
+
         // 되돌아가기 버튼
-        frameBtnBack = v.findViewById(R.id.frame_btn_back);
         frameBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +116,6 @@ public class MapFragment extends Fragment {
         });
 
         //검색어 입력하기 전 자식 Fragment 이동
-        EditText editSearch = v.findViewById(R.id.editTextFilter);
         editSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -109,7 +132,8 @@ public class MapFragment extends Fragment {
         return v;
     }
 
-    public void changeDragView(boolean b){
+    public static void changeDragView(boolean b){
+        Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
         if(b){ //가게 상세 정보: true
             linearResult.setVisibility(View.VISIBLE);
             listData.setVisibility(View.INVISIBLE);
@@ -117,5 +141,6 @@ public class MapFragment extends Fragment {
             linearResult.setVisibility(View.INVISIBLE);
             listData.setVisibility(View.VISIBLE);
         }
+        Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
     }
 }
