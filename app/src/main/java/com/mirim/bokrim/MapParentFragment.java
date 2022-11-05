@@ -67,14 +67,12 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
                 // TODO : Listview 아이템 클릭시 화면 이동
                 //지도 검색 결과 프래그먼트로 이동
                 Log.d("리스트뷰", "아이템 클릭");
-//                Fragment fg = ChildMapFragment.newInstance();
-                setChildFragment(fg);
+                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance());
 
 //                //검색 아이콘 => X 아이콘
 //                imgSearch.setImageResource(R.drawable.x);
 //                imgSearch.setTag("x");
 
-                //키보드 숨기기
                 keyBordHide();
             }
         });

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -128,13 +129,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/text_store_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:text="구르미 한복"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"/>
                 <TextView
+                    android:id="@+id/text_store_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="서울 종로구 효자로 5 1층"

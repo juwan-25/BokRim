@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.mirim.ListView.ListViewMapAdapter;
+import com.mirim.bokrim.Datas.Store;
+import com.mirim.bokrim.Datas.StoreList;
+import com.mirim.bokrim.ListView.ListViewMapAdapter;
 
 import net.daum.mf.map.api.MapView;
 
@@ -21,8 +24,15 @@ public class MapFragment extends Fragment {
     public MapFragment() {}
 
     ListView listData; // 가게 정보들 보이는 리스트뷰
-    LinearLayout linearResult;
-    FrameLayout frameBtnBack;
+
+    TextView textStoreName, textStoreAdd; // 가게 상세 정보
+
+    LinearLayout linearResult; // 가게 상세 정보 페이지
+    FrameLayout frameBtnBack; // 되돌아가기 버튼
+
+    public static MapFragment newInstance() {
+        return new MapFragment();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,26 +54,30 @@ public class MapFragment extends Fragment {
         ListViewMapAdapter adapter = new ListViewMapAdapter();
         listData = v.findViewById(R.id.list_map);
         listData.setAdapter(adapter);
+
         // TODO: 실제 가게 정보 입력
-        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
-        adapter.addItem("두번째 가게", "두번째 주소", 1);
+        for(int i = 0; i< StoreList.storeList.size(); i++)
+            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
 
-        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
-        adapter.addItem("두번째 가게", "두번째 주소", 1);
 
-        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
-        adapter.addItem("두번째 가게", "두번째 주소", 1);
+        // 가게 상세 정보 페이지
+        textStoreName = v.findViewById(R.id.text_store_name);
+        textStoreAdd = v.findViewById(R.id.text_store_address);
 
-        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
-        adapter.addItem("두번째 가게", "두번째 주소", 1);
-
-        // TODO: 리스트뷰 아이템 온클릭
+        // TODO: 리스트뷰 아이템 온클릭 xml 전환 전 ripple 나타나게 하기
         linearResult = v.findViewById(R.id.linear_result);
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                changeDragView(true);
                 frameBtnBack.setVisibility(View.VISIBLE);
+                changeDragView(true);
+
+                for(int i = 0; i< StoreList.storeList.size(); i++){
+                    if(i==position){
+                        textStoreName.setText(StoreList.storeList.get(i).title);
+                        textStoreAdd.setText(StoreList.storeList.get(i).address);
+                    }
+                }
             }
         });
 

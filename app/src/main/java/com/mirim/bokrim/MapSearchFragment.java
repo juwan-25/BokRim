@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mirim.ListView.ListViewSearchAdapter;
-import com.mirim.ListView.ListViewSearchItem;
+import com.mirim.bokrim.ListView.ListViewSearchAdapter;
+import com.mirim.bokrim.ListView.ListViewSearchItem;
 
 public class MapSearchFragment extends Fragment {
     FragmentListener fragmentListener;
@@ -93,7 +93,8 @@ public class MapSearchFragment extends Fragment {
                 // 가게 아이디 다른 프래그먼트로 보내고
                 fragmentListener.onCommand(1, Integer.toString(storeId));
                 // 검색 결과 프래그먼트로 이동
-                MapParentFragment.btnListCheck.performClick();
+                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance());
+//                MapParentFragment.btnListCheck.performClick();
             }
         });
 

@@ -1,4 +1,4 @@
-package com.mirim.ListView;
+package com.mirim.bokrim.ListView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,8 +13,8 @@ import com.mirim.bokrim.R;
 
 import java.util.ArrayList;
 
-public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
-    public ListViewSearchAdapter() {
+public class ListViewMapAdapter extends BaseAdapter implements Filterable {
+    public ListViewMapAdapter() {
     }
 
     private ArrayList<ListViewSearchItem> listViewItemList = new ArrayList<ListViewSearchItem>(); //원본 데이터 리스트
@@ -30,7 +30,7 @@ public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
         // listview_item.xml ==inflate==> convertView 참조 획득
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_search_item, parent, false);
+            convertView = inflater.inflate(R.layout.listview_map_item, parent, false);
         }
 
         // 화면에 표시될 View으로부터 위젯에 대한 참조 획득

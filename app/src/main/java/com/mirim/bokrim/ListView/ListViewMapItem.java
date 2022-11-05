@@ -1,4 +1,4 @@
-package com.mirim.ListView;
+package com.mirim.bokrim.ListView;
 
 public class ListViewMapItem {
     private String name;
