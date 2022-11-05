@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.mirim.ListView.ListViewMapAdapter;
@@ -20,7 +21,7 @@ public class MapFragment extends Fragment {
     public MapFragment() {}
 
     ListView listData; // 가게 정보들 보이는 리스트뷰
-    FrameLayout frameResult;
+    LinearLayout linearResult;
     FrameLayout frameBtnBack;
 
     @Override
@@ -47,12 +48,22 @@ public class MapFragment extends Fragment {
         adapter.addItem("첫번째 가게", "첫번째 주소", 0);
         adapter.addItem("두번째 가게", "두번째 주소", 1);
 
+        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
+        adapter.addItem("두번째 가게", "두번째 주소", 1);
+
+        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
+        adapter.addItem("두번째 가게", "두번째 주소", 1);
+
+        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
+        adapter.addItem("두번째 가게", "두번째 주소", 1);
+
         // TODO: 리스트뷰 아이템 온클릭
-        frameResult = v.findViewById(R.id.linear_result);
+        linearResult = v.findViewById(R.id.linear_result);
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 changeDragView(true);
+                frameBtnBack.setVisibility(View.VISIBLE);
             }
         });
 
@@ -62,6 +73,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 changeDragView(false);
+                frameBtnBack.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -85,10 +97,10 @@ public class MapFragment extends Fragment {
 
     public void changeDragView(boolean b){
         if(b){ //가게 상세 정보: true
-            frameResult.setVisibility(View.VISIBLE);
+            linearResult.setVisibility(View.VISIBLE);
             listData.setVisibility(View.INVISIBLE);
         }else{ //리스트뷰: false
-            frameResult.setVisibility(View.INVISIBLE);
+            linearResult.setVisibility(View.INVISIBLE);
             listData.setVisibility(View.VISIBLE);
         }
     }
