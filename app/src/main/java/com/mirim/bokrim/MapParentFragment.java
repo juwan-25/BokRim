@@ -92,7 +92,6 @@ public class MapParentFragment extends Fragment implements View.OnClickListener 
             MapSearchFragment mapSearchFragment = new MapSearchFragment();
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d("텍스트 입력", "도대체");
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

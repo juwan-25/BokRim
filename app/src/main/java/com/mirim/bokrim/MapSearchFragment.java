@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mirim.bokrim.Datas.StoreList;
 import com.mirim.bokrim.ListView.ListViewSearchAdapter;
 import com.mirim.bokrim.ListView.ListViewSearchItem;
 
@@ -25,7 +26,7 @@ public class MapSearchFragment extends Fragment {
     EditText editSearch; //검색어 editText 타입
     ListView listData; //검색 결과 보이는 리스트뷰
     static Button btnFilterCheck;
-    boolean isSearch = false;
+    static boolean isSearch = false;
     int storeId;
 
     public MapSearchFragment() {}
@@ -54,12 +55,8 @@ public class MapSearchFragment extends Fragment {
 
         // TODO: 실제 가게 정보 데이터 추가
         //  리스트뷰에 전체 데이터 추가
-        adapter.addItem("첫번째 가게", "첫번째 주소", 0);
-        adapter.addItem("두번째 가게", "두번째 주소", 1);
-//        for(int i = 0; i<StoreList.storeList.size(); i++){
-//            Store s = (Store) (StoreList.storeList.get(i));
-//            adapter.addItem(s.title, s.address, s.id);
-//        }
+        for(int i = 0; i< StoreList.storeList.size(); i++)
+            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
 
         //  ParentFragment에서 검색어값 받아오기
         LayoutInflater layoutInflater = getLayoutInflater();
@@ -67,15 +64,15 @@ public class MapSearchFragment extends Fragment {
         editSearch = layout.findViewById(R.id.editTextFilter);
         editSearch.setText(strSearch); //displayMessage()로 strSearch에 값이 들어있음
 
-
         // TODO: 검색어 입력시 필터링 시작
         //  ListView 필터링
         btnFilterCheck = v.findViewById(R.id.btn_filter_check);
         btnFilterCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("텍스트 입력", "헉 드디어 이게 보인다니 지민아 수고했써"+Boolean.toString(isSearch));
                 if(isSearch) ((ListViewSearchAdapter) listData.getAdapter()).getFilter().filter(strSearch);
+                Log.d("텍스트 입력", "헉 드디어 이게 보인다니 지민아 수고했써"+Boolean.toString(isSearch)+" "+strSearch);
+
             }
         });
 
