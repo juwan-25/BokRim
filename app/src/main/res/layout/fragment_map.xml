@@ -134,7 +134,7 @@
                     android:id="@+id/text_store_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="구르미 한복"
+                    android:text="보이묜 안됑..."
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="@color/black"

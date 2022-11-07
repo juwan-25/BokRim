@@ -27,12 +27,14 @@ public class MapFragment extends Fragment {
 
     static SlidingUpPanelLayout slidingUpPanelLayout; // 슬라이딩 레이아웃
 
-    static ListView listData; // 가게 정보들 보이는 리스트뷰
+    public static ListView listData; // 가게 정보들 보이는 리스트뷰
 
     static LinearLayout linearResult; // 가게 상세 정보 페이지
     FrameLayout frameBtnBack; // 되돌아가기 버튼
 
-    TextView textStoreName, textStoreAdd; // 가게 상세 정보
+    public static TextView textStoreName, textStoreAdd; // 가게 상세 정보
+
+    public static int storeId;
 
     public static boolean isSlidingDown = true;
     public static boolean isDragList = true;
@@ -87,22 +89,31 @@ public class MapFragment extends Fragment {
         for(int i = 0; i< StoreList.storeList.size(); i++)
             adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
 
-
         // TODO: 리스트뷰 아이템 온클릭 xml 전환 전 ripple 나타나게 하기
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 frameBtnBack.setVisibility(View.VISIBLE);
                 changeDragView(true);
+                Log.d("리스트뷰", "실행됏쮸"+Integer.toString(storeId)+Integer.toString(position));
 
                 for(int i = 0; i< StoreList.storeList.size(); i++){
                     if(i==position){
+                        Log.d("리스트뷰", "나는 안 되는 것이냐!!!"+StoreList.storeList.get(i).title);
+
                         textStoreName.setText(StoreList.storeList.get(i).title);
                         textStoreAdd.setText(StoreList.storeList.get(i).address);
+
+                        Log.d("리스트뷰", "if문 안에 "+textStoreName.getText().toString());
                     }
+                    Log.d("리스트뷰", "포문 안에 "+textStoreName.getText().toString());
                 }
             }
         });
+
+
+        Log.d("리스트뷰", "온클릭 밖에 "+textStoreName.getText().toString());
+
 
         Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
 
@@ -142,5 +153,18 @@ public class MapFragment extends Fragment {
             listData.setVisibility(View.VISIBLE);
         }
         Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
+    }
+
+    public void displayMessage(String message){
+        storeId = Integer.parseInt(message);
+    }
+
+    public static void setTextStore(){
+        for(int i = 0; i< StoreList.storeList.size(); i++){
+            if(i==storeId){
+                textStoreName.setText(StoreList.storeList.get(i).title);
+                textStoreAdd.setText(StoreList.storeList.get(i).address);
+            }
+        }
     }
 }

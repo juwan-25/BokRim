@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         switch (index){
             case 0: // MapParentFragment =>
                 mapSearchFragment.displayMessage(data);
+                mapFragment.displayMessage(data);
                 break;
         }
     }

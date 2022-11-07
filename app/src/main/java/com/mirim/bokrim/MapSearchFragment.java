@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import com.mirim.bokrim.Datas.StoreList;
 import com.mirim.bokrim.ListView.ListViewSearchAdapter;
 import com.mirim.bokrim.ListView.ListViewSearchItem;
+
+import java.util.Map;
 
 public class MapSearchFragment extends Fragment {
     FragmentListener fragmentListener;
@@ -90,10 +93,22 @@ public class MapSearchFragment extends Fragment {
                 Log.d("슬라이딩", "올라오세유");
 
 
-                // 가게 아이디 다른 프래그먼트로 보내고
-                fragmentListener.onCommand(1, Integer.toString(storeId));
                 // 검색 결과 프래그먼트로 이동
                 MapParentFragment.btnListCheck.performClick();
+
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MapFragment.listData.performItemClick(
+                                listData.getChildAt(storeId),
+                                storeId,
+                                listData.getAdapter().getItemId(storeId));
+                    }
+                });
+
+                // 가게 아이디 다른 프래그먼트로 보내고
+                //fragmentListener.onCommand(1, Integer.toString(storeId));
+
             }
         });
 
