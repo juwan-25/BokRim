@@ -36,9 +36,10 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-public class MapFragment extends Fragment  implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener, MapView.POIItemEventListener{
+public class MapFragment extends Fragment implements  MapView.CurrentLocationEventListener, MapView.MapViewEventListener, MapView.POIItemEventListener{
     public MapFragment() {}
 
+    // *변수 선언
     static SlidingUpPanelLayout slidingUpPanelLayout; // 슬라이딩 레이아웃
 
     public static ListView listData; // 가게 정보들 보이는 리스트뷰
@@ -46,18 +47,20 @@ public class MapFragment extends Fragment  implements MapView.CurrentLocationEve
     static LinearLayout linearResult; // 가게 상세 정보 페이지
     FrameLayout frameBtnBack; // 되돌아가기 버튼
 
-    public static TextView textStoreName, textStoreAdd; // 가게 상세 정보
+    public static TextView textStoreName, textStoreAdd, textStoreOper; // 가게 상세 정보
 
     public static int storeId;
 
     public static boolean isSlidingDown = true;
     public static boolean isDragList = true;
 
+    // 지도
     MapView mapView;
     ViewGroup mapViewContainer;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
+
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -78,6 +81,7 @@ public class MapFragment extends Fragment  implements MapView.CurrentLocationEve
 
         textStoreName = v.findViewById(R.id.text_store_name);
         textStoreAdd = v.findViewById(R.id.text_store_address);
+        textStoreOper = v.findViewById(R.id.text_store_operation);
 
         linearResult = v.findViewById(R.id.linear_result);
         frameBtnBack = v.findViewById(R.id.frame_btn_back);
@@ -96,11 +100,12 @@ public class MapFragment extends Fragment  implements MapView.CurrentLocationEve
 
         //카카오맵
         // TODO : 프래그먼트 닫힐때마다 지도 지워주기
-        mapView = new MapView(getContext());
+        //지도 띄우기
+        mapView = new MapView(getActivity());
         mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
-        //  현재 위치로 중심점 변경
+        //현재 위치로 중심점 변경
         mapView.setMapViewEventListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         if (!checkLocationServicesStatus()) {
@@ -131,6 +136,7 @@ public class MapFragment extends Fragment  implements MapView.CurrentLocationEve
 
                         textStoreName.setText(StoreList.storeList.get(i).title);
                         textStoreAdd.setText(StoreList.storeList.get(i).address);
+                        textStoreOper.setText(StoreList.storeList.get(i).opertime);
 
                         Log.d("리스트뷰", "if문 안에 "+textStoreName.getText().toString());
                     }
@@ -196,14 +202,12 @@ public class MapFragment extends Fragment  implements MapView.CurrentLocationEve
         }
     }
 
-    // 프래그먼트 이동할때마다 지도 지워주기
     @Override
     public void onDestroy() {
         super.onDestroy();
         mapViewContainer.removeAllViews();
     }
 
-    // 카카오맵 interface 추상 메서드 구현
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
         MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();

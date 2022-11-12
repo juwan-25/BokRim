@@ -1,12 +1,14 @@
 package com.mirim.bokrim.ListView;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mirim.bokrim.R;
@@ -36,6 +38,7 @@ public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
         // 화면에 표시될 View으로부터 위젯에 대한 참조 획득
         TextView sNameText = (TextView) convertView.findViewById(R.id.text_store_name);
         TextView sLoctText = (TextView) convertView.findViewById(R.id.text_store_location);
+        ImageView sImage = (ImageView) convertView.findViewById(R.id.img_store);
 
         // Data Set(filteredItemList)에서 position에 위치한 데이터 참조 획득
         ListViewSearchItem listViewItem = filteredItemList.get(position);
@@ -43,6 +46,7 @@ public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
         // 아이템 내 각 위젯에 데이터 반영
         sNameText.setText(listViewItem.getTitle());
         sLoctText.setText(listViewItem.getDesc());
+        sImage.setImageResource(listViewItem.getImg());
 
         return convertView;
     }
@@ -57,11 +61,12 @@ public class ListViewSearchAdapter extends BaseAdapter implements Filterable {
     public Object getItem(int position) { return filteredItemList.get(position); }
 
     // 데이터 추가
-    public void addItem(String name, String location, int id) {
+    public void addItem(String name, String location, int img, int id) {
         ListViewSearchItem item = new ListViewSearchItem();
 
         item.setTitle(name);
         item.setDesc(location);
+        item.setImg(img);
         item.setId(id);
 
         listViewItemList.add(item);

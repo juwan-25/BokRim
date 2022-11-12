@@ -56,10 +56,10 @@ public class MapSearchFragment extends Fragment {
         listData = (ListView) v.findViewById(R.id.list_search);
         listData.setAdapter(adapter);
 
-        // TODO: 실제 가게 정보 데이터 추가
+        // TODO: DB에서 이미지 가져오기
         //  리스트뷰에 전체 데이터 추가
         for(int i = 0; i< StoreList.storeList.size(); i++)
-            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
+            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, R.drawable.ic_mark_non, StoreList.storeList.get(i).id);
 
         //  ParentFragment에서 검색어값 받아오기
         LayoutInflater layoutInflater = getLayoutInflater();

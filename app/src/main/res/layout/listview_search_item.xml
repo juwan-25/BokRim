@@ -7,6 +7,7 @@
     <!--검색어 입력 리스트뷰 목록에 뜰 layout-->
 
     <ImageView
+        android:id="@+id/img_store"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:src="@drawable/ic_heart_on"
@@ -33,9 +34,9 @@
         <TextView
             android:id="@+id/text_store_location"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="14dp"
             android:text="가게 위치"
-            android:textSize="11dp"
+            android:textSize="10dp"
             android:textColor="#8F000000" />
     </LinearLayout>
 
