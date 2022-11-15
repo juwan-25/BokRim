@@ -192,6 +192,7 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
                 //맵 포인트 위도경도 설정
                 MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(storeLat, storeLug);
                 marker.setTag(0);
+                marker.setItemName(storeName);
                 marker.setMapPoint(mapPoint);
                 marker.setMarkerType(MapPOIItem.MarkerType.RedPin);
 
