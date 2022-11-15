@@ -45,16 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="14dp"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="30dp"
                 >
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_search"
-                    android:background="@color/white"
+                    android:background="@drawable/search_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <FrameLayout
                     android:id="@+id/field_search"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
@@ -65,8 +67,6 @@
                         android:inputType="textPersonName"
                         android:hint="가게 이름, 위치 검색"
                         android:textSize="17dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
                         android:imeOptions="actionDone"
                         android:background="@android:color/transparent" />
 
@@ -77,8 +77,6 @@
                         android:layout_width="21dp"
                         android:layout_height="21dp"
                         android:background="@android:color/transparent"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="14dp"
                         android:layout_gravity="right"
                         />
                 </FrameLayout>
