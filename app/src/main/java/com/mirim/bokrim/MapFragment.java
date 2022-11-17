@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -15,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,14 +52,21 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
 
     public static TextView textStoreName, textStoreAdd, textStoreOper; // 가게 상세 정보
 
-    public static int storeId;
-
     public static boolean isSlidingDown = true;
     public static boolean isDragList = true;
+
+    // 가게 상세 정보
+    public static int storeId;
+    static String storeName = null;
+    static String storeAdd = null;
+    static String storeOper = null;
+    static Double storeLat = 0.0;
+    static Double storeLug = 0.0;
 
     // 지도
     MapView mapView;
     ViewGroup mapViewContainer;
+    private MapPOIItem mCustomBmMarker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -92,11 +102,30 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
         // 슬라이딩 레이아웃
         Log.d("슬라이딩", "올라오라고 햇는디 그랫는디"+slidingUpPanelLayout.getPanelState());
         if(isSlidingDown) slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        if(isDragList){
-            listData.setVisibility(View.VISIBLE);
-            linearResult.setVisibility(View.INVISIBLE);
-            frameBtnBack.setVisibility(View.INVISIBLE);
-        }
+        //if(isDragList){
+        //    listData.setVisibility(View.VISIBLE);
+        //    linearResult.setVisibility(View.INVISIBLE);
+        //    frameBtnBack.setVisibility(View.INVISIBLE);
+        //}
+
+        //TODO : 가게 위치에 마커 잘 찍혔는지 봐야됨
+        slidingUpPanelLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+            }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if(listData.getVisibility() == View.INVISIBLE){
+                    if(newState == SlidingUpPanelLayout.PanelState.EXPANDED){
+                        mapView.setZoomLevel(1, true);
+                    }
+                    if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+                    }
+                }
+            }
+        });
 
         //카카오맵
         // TODO : 프래그먼트 닫힐때마다 지도 지워주기
@@ -104,6 +133,8 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
         mapView = new MapView(getActivity());
         mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+        //mapView.setZoomLevel(1, true);
+        //for(int i = 0; i<8; i++) mapView.zoomIn(true);
 
         //현재 위치로 중심점 변경
         mapView.setMapViewEventListener(this);
@@ -118,9 +149,10 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
         ListViewMapAdapter adapter = new ListViewMapAdapter();
         listData.setAdapter(adapter);
 
-        // TODO: 실제 가게 정보 입력
-        for(int i = 0; i< StoreList.storeList.size(); i++)
-            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, StoreList.storeList.get(i).id);
+        for(int i = 0; i< StoreList.storeList.size(); i++){
+            adapter.addItem(StoreList.storeList.get(i).title, StoreList.storeList.get(i).address, storeId);
+            //createCustomBitmapMarker(mapView, StoreList.storeList.get(i).title, StoreList.storeList.get(i).lat, StoreList.storeList.get(i).lug, storeId);
+        }
 
         // TODO: 리스트뷰 아이템 온클릭 xml 전환 전 ripple 나타나게 하기
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -130,25 +162,46 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
                 changeDragView(true);
                 Log.d("리스트뷰", "실행됏쮸"+Integer.toString(storeId)+Integer.toString(position));
 
+
                 for(int i = 0; i< StoreList.storeList.size(); i++){
                     if(i==position){
-                        Log.d("리스트뷰", "나는 안 되는 것이냐!!!"+StoreList.storeList.get(i).title);
+                        storeName = StoreList.storeList.get(i).title;
+                        storeAdd = StoreList.storeList.get(i).address;
+                        storeOper = StoreList.storeList.get(i).opertime;
+                        storeLat = StoreList.storeList.get(i).lat;
+                        storeLug = StoreList.storeList.get(i).lug;
 
-                        textStoreName.setText(StoreList.storeList.get(i).title);
-                        textStoreAdd.setText(StoreList.storeList.get(i).address);
-                        textStoreOper.setText(StoreList.storeList.get(i).opertime);
+                        Log.d("보쟈보쟈", storeName+" "+storeAdd+" "+Integer.toString(storeId));
 
+                        textStoreName.setText(storeName);
+                        textStoreAdd.setText(storeAdd);
+                        textStoreOper.setText(storeOper);
+
+                        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(storeLat, storeLug), 9, true);
                         Log.d("리스트뷰", "if문 안에 "+textStoreName.getText().toString());
                     }
                     Log.d("리스트뷰", "포문 안에 "+textStoreName.getText().toString());
                 }
+
+                //  지도 중심점을 가게 위치로
+                mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(storeLat, storeLug), true);
+                mapView.setZoomLevel(3, true);
+
+                MapPOIItem marker = new MapPOIItem();
+
+                //맵 포인트 위도경도 설정
+                MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(storeLat, storeLug);
+                marker.setTag(0);
+                marker.setItemName(storeName);
+                marker.setMapPoint(mapPoint);
+                marker.setMarkerType(MapPOIItem.MarkerType.RedPin);
+
+                mapView.addPOIItem(marker);
             }
         });
 
 
         Log.d("리스트뷰", "온클릭 밖에 "+textStoreName.getText().toString());
-
-
         Log.d("드래그뷰", Integer.toString(linearResult.getVisibility())+" "+Integer.toString(listData.getVisibility()));
 
         // 되돌아가기 버튼
@@ -196,8 +249,8 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     public static void setTextStore(){
         for(int i = 0; i< StoreList.storeList.size(); i++){
             if(i==storeId){
-                textStoreName.setText(StoreList.storeList.get(i).title);
-                textStoreAdd.setText(StoreList.storeList.get(i).address);
+                textStoreName.setText(storeName);
+                textStoreAdd.setText(storeAdd);
             }
         }
     }
@@ -411,4 +464,50 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
     }
+
+    private void createCustomBitmapMarker(MapView mapView, String name, Double lat, Double lug, int id) {
+        mCustomBmMarker = new MapPOIItem();
+        mCustomBmMarker.setItemName(name);
+        mCustomBmMarker.setTag(id);
+        mCustomBmMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lug));
+        // TODO: mCustomBmMarker 클릭시 검색 결과 화면으로 이동
+
+        //MapParentFragment.btnListCheck.performClick();
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                int storeId = mCustomBmMarker.getTag(); //storeId를 변수명으로 써도 되는지 잘 모르겟음
+                MapFragment.listData.performItemClick(
+                        listData.getChildAt(storeId),
+                        storeId,
+                        listData.getAdapter().getItemId(storeId));
+            }
+        });
+
+        mCustomBmMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.custom_marker_star);
+        mCustomBmMarker.setCustomImageBitmap(bm);
+
+        mapView.setZoomLevel(1, true);
+        mapView.addPOIItem(mCustomBmMarker);
+    }
+
+    private void createMarker(MapView mapView, String name,Double lat, Double lug){
+
+        //  지도 중심점을 가게 위치로
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lug), true);
+        mapView.setZoomLevel(3, true);
+
+        //  Marker 생성
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName(name);
+        marker.setTag(0);
+        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(lat, lug+5);
+        marker.setMapPoint(MARKER_POINT);
+        marker.setMarkerType(MapPOIItem.MarkerType.RedPin);
+        mapView.addPOIItem(marker);
+    }
+
+    //TODO: 지금은 슬라이딩할때만 maker가 생성됨! listview 온클릭 이벤트를 다시 봐보자
 }
