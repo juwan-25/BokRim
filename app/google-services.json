@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1035431499706",
+    "project_id": "bokrim-202c6",
+    "storage_bucket": "bokrim-202c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035431499706:android:804ba0482fe1300aee6f83",
+        "android_client_info": {
+          "package_name": "com.mirim.bokrim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035431499706-t561f6i82nuvns667m7aivl05qdb4ibo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mirim.bokrim",
+            "certificate_hash": "1540fb5c5bffc8955ba3ec98513791623230d0b5"
+          }
+        },
+        {
+          "client_id": "1035431499706-mn3d13hstrbj7q6gha11a46mpbk4vpc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDurIuqkta1vMxPYQkIcYNYoF4N2E8L7Bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035431499706-mn3d13hstrbj7q6gha11a46mpbk4vpc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
