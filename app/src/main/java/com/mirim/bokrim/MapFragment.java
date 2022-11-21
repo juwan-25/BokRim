@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,11 +26,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mirim.bokrim.Datas.Store;
 import com.mirim.bokrim.Datas.StoreList;
 import com.mirim.bokrim.ListView.ListViewMapAdapter;
@@ -51,6 +58,7 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     FrameLayout frameBtnBack; // 되돌아가기 버튼
 
     public static TextView textStoreName, textStoreAdd, textStoreOper; // 가게 상세 정보
+    public static ImageView[] imgMap= new ImageView[2]; //가게 이미지
 
     public static boolean isSlidingDown = true;
     public static boolean isDragList = true;
@@ -62,6 +70,11 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     static String storeOper = null;
     static Double storeLat = 0.0;
     static Double storeLug = 0.0;
+
+    //스토리지
+    FirebaseStorage storage = FirebaseStorage.getInstance("gs://bokrim-202c6.appspot.com/");
+    StorageReference storageRef = storage.getReference();
+    static int file; // 파일 이름
 
     // 지도
     MapView mapView;
@@ -92,6 +105,8 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
         textStoreName = v.findViewById(R.id.text_store_name);
         textStoreAdd = v.findViewById(R.id.text_store_address);
         textStoreOper = v.findViewById(R.id.text_store_operation);
+        imgMap[0] = v. findViewById(R.id.map_img1);
+        imgMap[1] = v. findViewById(R.id.map_img2);
 
         linearResult = v.findViewById(R.id.linear_result);
         frameBtnBack = v.findViewById(R.id.frame_btn_back);
@@ -165,6 +180,8 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
 
                 for(int i = 0; i< StoreList.storeList.size(); i++){
                     if(i==position){
+                        file = i+1;
+
                         storeName = StoreList.storeList.get(i).title;
                         storeAdd = StoreList.storeList.get(i).address;
                         storeOper = StoreList.storeList.get(i).opertime;
@@ -176,6 +193,39 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
                         textStoreName.setText(storeName);
                         textStoreAdd.setText(storeAdd);
                         textStoreOper.setText(storeOper);
+                        //스토리지로 이미지 불러오기
+                        storageRef.child("Store/id"+file+"/id"+file+"_1.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                //이미지 로드 성공시
+                                Glide.with(getActivity())
+                                        .load(uri)
+                                        .into(imgMap[0]);
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                //이미지 로드 실패시
+                                Toast.makeText(getActivity(), "실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        storageRef.child("Store/id"+file+"/id"+file+"_2.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                //이미지 로드 성공시
+                                Glide.with(getActivity())
+                                        .load(uri)
+                                        .into(imgMap[1]);
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                //이미지 로드 실패시
+                                Toast.makeText(getActivity(), "실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
                         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(storeLat, storeLug), 9, true);
                         Log.d("리스트뷰", "if문 안에 "+textStoreName.getText().toString());
