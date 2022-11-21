@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="25dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/history_list"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/history_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="한복의 등장"
+                android:fontFamily="@font/nanumgothicbold"
+                android:textColor="#000"
+                android:textSize="23dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginLeft="32dp"/>
+            <TextView
+                android:id="@+id/history_subtit"
+                android:paddingHorizontal="34dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="한복의 등장은 고구려 벽화에서 찾아볼 수 있습니다. 벽화에는 남성과 여성이 모두 저고리와 비슷한 상의와 함께 바지나 치마를 입고 있습니다. "
+                android:fontFamily="@font/nanumgothic"
+                android:textColor="#6D6D6D"
+                android:textSize="16dp"
+                android:lineHeight="20dp"/>
+            <TextView
+                android:id="@+id/text_more"
+                android:paddingLeft="34dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/더보기"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

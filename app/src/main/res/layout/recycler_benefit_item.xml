@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/benefit_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:src="@drawable/event1"/>
+        <LinearLayout
+            android:layout_marginRight="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/benefit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5대 궁궐 한복 착용 무료"
+                android:fontFamily="@font/nanumgothicbold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+            <TextView
+                android:id="@+id/benefit_cont1"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="경복궁, 창덕궁, 창경궁, 경희궁, 덕수궁"
+                android:fontFamily="@font/nanumgothic"
+                android:textColor="#6D6D6D"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/benefit_cont2"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="한복 착용 입장료 무료 (내외국인 상관X)"
+                android:fontFamily="@font/nanumgothic"
+                android:textColor="#6D6D6D"
+                android:textSize="15dp"/>
+        </LinearLayout>
+        <View
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#000"/>
+    </LinearLayout>
+
+
+</LinearLayout>

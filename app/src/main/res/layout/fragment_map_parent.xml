@@ -36,7 +36,6 @@
 
             <ImageButton
                 android:id="@+id/img_search_icon"
-                android:src="@drawable/map_search_icon"
                 android:tag="o"
                 android:layout_width="21dp"
                 android:layout_height="21dp"

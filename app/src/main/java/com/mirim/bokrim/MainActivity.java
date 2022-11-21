@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.mirim.bokrim.Datas.Benefit;
 
 import java.security.MessageDigest;
 
@@ -24,7 +25,11 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     HistoryFragment historyFragment = new HistoryFragment();
     MapFragment mapFragment = new MapFragment();
     BenefitFragment benefitFragment = new BenefitFragment();
+    Benefit2Fragment benefit2Fragment = new Benefit2Fragment();
+    EventFragment eventFragment = new EventFragment();
+    PlaceFragment placeFragment = new PlaceFragment();
     ClosetFragment closetFragment = new ClosetFragment();
+    HistoryDetailFragment historyDetailFragment = new HistoryDetailFragment();
 
     MapSearchFragment mapSearchFragment = new MapSearchFragment();
     
@@ -33,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, benefitFragment);
+        transaction.replace(R.id.frameLayout, benefit2Fragment);
+
         setContentView(R.layout.activity_main);
         gethash();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, historyFragment).commit();
@@ -91,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 mapSearchFragment.displayMessage(data);
                 mapFragment.displayMessage(data);
                 break;
+            case 1:
+                eventFragment.displayMessage(data);
+                break;
+            case 2:
+                placeFragment.displayMessage(data);
+                break;
+            case 3:
+                historyDetailFragment.displayMessage(data);
+                break;
+
         }
     }
 }

@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BenefitFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="한복 혜택 안내"
+        android:textSize="26dp"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000"/>
+    <LinearLayout
+        android:layout_marginTop="13dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="혜택" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/btn_event"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#fff"
+            android:elevation="20dp"
+            android:fontFamily="@font/nanumgothic"
+            android:textColor="#000"
+            android:text="행사"/>
+        <Button
+            android:id="@+id/btn_place"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#F3F3F3"
+            android:elevation="20dp"
+            android:fontFamily="@font/nanumgothic"
+            android:textColor="#000"
+            android:text="장소"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/event_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+</LinearLayout>

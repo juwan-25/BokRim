@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoryFragment">
+
+    <ImageView
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/history_back"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="25dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumgothic"
+                    android:text="history of hanbok"
+                    android:textSize="15dp"
+                    android:textColor="#848484"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumgothicbold"
+                    android:text="한복의 역사"
+                    android:textSize="32dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"/>
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="650dp"
+                    android:src="@drawable/history_detail_back"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="25dp">
+                <TextView
+                    android:id="@+id/history_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="한복의 등장"
+                    android:fontFamily="@font/nanumgothicbold"
+                    android:textColor="#000"
+                    android:textSize="23dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="38dp"/>
+                <TextView
+                    android:id="@+id/history_detail_cont"
+                    android:paddingHorizontal="38dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="한복의 등장은 고구려 벽화에서 찾아볼 수 있습니다. 벽화에는 남성과 여성이 모두 저고리와 비슷한 상의와 함께 바지나 치마를 입고 있습니다. "
+                    android:fontFamily="@font/nanumgothic"
+                    android:textColor="#6D6D6D"
+                    android:textSize="16dp"/>
+                    <ImageView
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/history_detail_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:paddingHorizontal="38dp"
+                        android:src="@drawable/historyimg1"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/history_backbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="605dp"
+                    android:src="@drawable/backbtn" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
