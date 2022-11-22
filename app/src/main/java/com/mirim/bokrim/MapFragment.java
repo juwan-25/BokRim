@@ -293,7 +293,11 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     }
 
     public void displayMessage(String message){
-        storeId = Integer.parseInt(message);
+        try{
+            storeId = Integer.parseInt(message);
+        }catch (NumberFormatException e){
+
+        }
     }
 
     public static void setTextStore(){
@@ -308,6 +312,12 @@ public class MapFragment extends Fragment implements  MapView.CurrentLocationEve
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mapViewContainer.removeAllViews();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         mapViewContainer.removeAllViews();
     }
 
