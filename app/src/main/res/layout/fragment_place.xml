@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumgothicbold"
-        android:text="2022년 한복상점"
+        android:text="제목"
         android:textSize="26dp"
         android:layout_marginTop="60dp"
         android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/id2"/>
+                        android:src="@drawable/place1"/>
                 </FrameLayout>
 
             <FrameLayout

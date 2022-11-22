@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mirim.bokrim.Datas.Benefit;
-import com.mirim.bokrim.Datas.EventList;
 import com.mirim.bokrim.Datas.PlaceList;
+import com.mirim.bokrim.RecyclerView.RecyclerBenefitAdapter;
+import com.mirim.bokrim.RecyclerView.RecyclerHistoryAdapter;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class Benefit2Fragment extends Fragment {
         }};
 
         //리사이클러 아이템 클릭 리스너
-        RecyclerHistoryAdapter.setOnItemClickListener(new RecyclerHistoryAdapter.OnItemClickListener()
+        RecyclerBenefitAdapter.setOnItemClickListener(new RecyclerHistoryAdapter.OnItemClickListener()
         {
             @Override
             public void onItemClick(View v, int pos)
@@ -79,7 +80,7 @@ public class Benefit2Fragment extends Fragment {
         });
 
         recyclerView = (RecyclerView)v.findViewById(R.id.place_recycler);
-        adapter = new RecyclerBenefitAdapter(getActivity().getApplicationContext(), list);
+        adapter = new RecyclerBenefitAdapter(getActivity().getApplicationContext(), list, false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

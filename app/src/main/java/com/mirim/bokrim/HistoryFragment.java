@@ -5,17 +5,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.mirim.bokrim.Datas.History;
 import com.mirim.bokrim.Datas.HistoryList;
+import com.mirim.bokrim.RecyclerView.RecyclerHistoryAdapter;
 
 import java.util.ArrayList;
 

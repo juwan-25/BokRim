@@ -1,16 +1,15 @@
-package com.mirim.bokrim;
+package com.mirim.bokrim.RecyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mirim.bokrim.Datas.History;
-import com.mirim.bokrim.Datas.HistoryList;
+import com.mirim.bokrim.R;
 
 import java.util.ArrayList;
 

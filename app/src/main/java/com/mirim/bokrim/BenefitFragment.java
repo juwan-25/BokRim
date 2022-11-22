@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +15,8 @@ import android.widget.Button;
 
 import com.mirim.bokrim.Datas.Benefit;
 import com.mirim.bokrim.Datas.EventList;
-import com.mirim.bokrim.Datas.History;
-import com.mirim.bokrim.Datas.HistoryList;
+import com.mirim.bokrim.RecyclerView.RecyclerBenefitAdapter;
+import com.mirim.bokrim.RecyclerView.RecyclerHistoryAdapter;
 
 import java.util.ArrayList;
 
@@ -82,7 +81,7 @@ public class BenefitFragment extends Fragment {
         });
 
         recyclerView = (RecyclerView)v.findViewById(R.id.event_recycler);
-        adapter = new RecyclerBenefitAdapter(getActivity().getApplicationContext(), list);
+        adapter = new RecyclerBenefitAdapter(getActivity().getApplicationContext(), list, true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

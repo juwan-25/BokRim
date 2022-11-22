@@ -6,11 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mirim.bokrim.Datas.Benefit;
 import com.mirim.bokrim.Datas.BenefitDetail;
@@ -27,7 +29,7 @@ public class PlaceFragment extends Fragment {
     ArrayList<BenefitDetail> list;
     BenefitDetail benefitDetail;
     TextView title;
-    int num;
+    static int num;
     FragmentListener fragmentListener;
 
     public PlaceFragment() {}
@@ -45,13 +47,12 @@ public class PlaceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_event, container, false);
+        View v = inflater.inflate(R.layout.fragment_place, container, false);
 
         img1 = v.findViewById(R.id.benefit_detail_img1);
         img2 = v.findViewById(R.id.benefit_detail_img2);
         img3 = v.findViewById(R.id.benefit_detail_img3);
         title = v.findViewById(R.id.place_title);
-
         list = new ArrayList<BenefitDetail>() {{
             for(int i = 0; i< PlaceDetailList.placedetailList.size(); i++){
                 benefitDetail = (BenefitDetail) (PlaceDetailList.placedetailList.get(i));
@@ -64,12 +65,14 @@ public class PlaceFragment extends Fragment {
         img2.setImageResource(list.get(num).img2);
         img3.setImageResource(list.get(num).img3);
 
+
         return v;
     }
 
 
     public void displayMessage(String message){
         num = Integer.parseInt(message);
+        Log.d("값", message);
     }
 
     @Override
