@@ -79,7 +79,7 @@ public class HistoryDetailFragment extends Fragment {
         title.setText(list.get(id).title);
         cont.setText(list.get(id).cont);
         int file = id+1;
-        storageRef.child("History/id"+file+ ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("History/id"+file+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 //이미지 로드 성공시

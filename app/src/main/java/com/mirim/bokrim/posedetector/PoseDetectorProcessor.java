@@ -1,0 +1,62 @@
+package com.mirim.bokrim.posedetector;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.pose.Pose;
+import com.google.mlkit.vision.pose.PoseDetection;
+import com.google.mlkit.vision.pose.PoseDetector;
+import com.google.mlkit.vision.pose.PoseDetectorOptionsBase;
+import  com.mirim.bokrim.GraphicOverlay;
+import  com.mirim.bokrim.VisionProcessorBase;
+
+/**
+ * A processor to run pose detector.
+ */
+public class PoseDetectorProcessor extends VisionProcessorBase<Pose> {
+    protected interface PoseDetectCallback {
+        void onDetectionComplete(@NonNull PosePositions posePositions, @NonNull GraphicOverlay graphicOverlay, Bitmap cameraImage, int framesPerSecond);
+    }
+
+    private static final String TAG = "PoseDetectorProcessor";
+
+    private final PoseDetector detector;
+    private PoseDetectCallback poseDetectCallback;
+
+    public PoseDetectorProcessor(
+            Context context, PoseDetectorOptionsBase options) {
+        super(context);
+        detector = PoseDetection.getClient(options);
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        detector.close();
+    }
+
+    @Override
+    protected Task<Pose> detectInImage(InputImage image) {
+        return detector.process(image);
+    }
+
+    @Override
+    protected void onSuccess(@NonNull Pose pose, @NonNull GraphicOverlay graphicOverlay, Bitmap cameraImage, int framesPerSecond) {
+        poseDetectCallback.onDetectionComplete(new PosePositions(pose), graphicOverlay, cameraImage, framesPerSecond);
+    }
+
+    @Override
+    protected void onFailure(@NonNull Exception e) {
+        Log.e(TAG, "Pose detection failed!", e);
+    }
+
+    protected void setPoseDetectCallback(PoseDetectCallback poseDetectCallback) {
+        this.poseDetectCallback = poseDetectCallback;
+    }
+
+}

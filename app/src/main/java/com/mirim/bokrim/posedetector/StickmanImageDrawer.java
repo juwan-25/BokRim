@@ -1,0 +1,167 @@
+package com.mirim.bokrim.posedetector;
+
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Paint;
+
+import androidx.annotation.NonNull;
+
+import  com.mirim.bokrim.GraphicOverlay;
+import  com.mirim.bokrim.ImageGraphic;
+import  com.mirim.bokrim.VideoEncoder;
+
+/**
+ * The class {@code StickmanImageDrawer} draws a stickman image basing
+ * on the pose detector processor.
+ */
+public class StickmanImageDrawer {
+    private final Paint stickmanPaint = new Paint(Color.BLACK);
+
+    private int figureID;
+    private int accessoryID;
+    private int accessoryType = -1;
+
+    private Bitmap backgroundImage;
+    private int backgroundColor = -1;
+    private Bitmap scaledBackgroundImage;
+    private Bitmap scaledBackgroundColor;
+    private boolean isBackgroundImageUpdated;
+    private boolean isBackgroundColorUpdated;
+
+    private float stickmanStrokeWidth = 12;
+
+    private VideoEncoder encoder;
+    private int framesPerSecond = 15;
+    private boolean encodeStickmanData = false;
+
+    public StickmanImageDrawer() {
+        stickmanPaint.setStrokeWidth(stickmanStrokeWidth);
+    }
+
+    public void setPoseDetectCallback(PoseDetectorProcessor poseDetectorProcessor) {
+        poseDetectorProcessor.setPoseDetectCallback(this::draw);
+    }
+
+    public void draw(@NonNull PosePositions posePositions, @NonNull GraphicOverlay graphicOverlay, Bitmap cameraImage, int framesPerSecond) {
+        this.framesPerSecond = framesPerSecond;
+
+        if (backgroundImage != null) {
+            if (isBackgroundImageUpdated) {
+                scaledBackgroundImage = Bitmap.createScaledBitmap(
+                        backgroundImage,
+                        cameraImage.getWidth(),
+                        cameraImage.getHeight(),
+                        true);
+
+                isBackgroundImageUpdated = false;
+            }
+
+            graphicOverlay.add(new ImageGraphic(graphicOverlay, scaledBackgroundImage));
+        } else {
+            scaledBackgroundImage = null;
+            graphicOverlay.add(new ImageGraphic(graphicOverlay, cameraImage));
+        }
+
+        if (backgroundColor != -1) {
+            if (isBackgroundColorUpdated) {
+                Bitmap backgroundColorImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                backgroundColorImage.eraseColor(backgroundColor);
+                scaledBackgroundColor = Bitmap.createScaledBitmap(
+                        backgroundColorImage,
+                        cameraImage.getWidth(),
+                        cameraImage.getHeight(),
+                        true);
+
+                isBackgroundColorUpdated = false;
+            }
+
+            graphicOverlay.add(new ImageGraphic(graphicOverlay, scaledBackgroundColor));
+        } else {
+            scaledBackgroundColor = null;
+        }
+
+
+        stickmanPaint.setStrokeWidth(graphicOverlay.scaleFactor * stickmanStrokeWidth);
+
+        if (figureID == 0) {
+            graphicOverlay.add(new ClassicStickmanGraphic(graphicOverlay, posePositions, accessoryID, accessoryType, stickmanPaint));
+        }
+
+        if (encoder != null) {
+            if (encodeStickmanData) {
+                encoder.queueFrame(
+                        new StickmanImage(
+                                graphicOverlay.getGraphicBitmap(),
+                                figureID,
+                                accessoryID,
+                                accessoryType,
+                                backgroundColor,
+                                stickmanPaint.getColor(),
+                                stickmanStrokeWidth,
+                                posePositions.poseLandmarkPositionX,
+                                posePositions.poseLandmarkPositionY
+                        )
+                );
+            } else {
+                encoder.queueFrame(
+                        new StickmanImage(
+                                graphicOverlay.getBackgroundGraphicBitmap(),
+                                figureID,
+                                accessoryID,
+                                accessoryType,
+                                backgroundColor,
+                                stickmanPaint.getColor(),
+                                stickmanStrokeWidth,
+                                posePositions.poseLandmarkPositionX,
+                                posePositions.poseLandmarkPositionY
+                        )
+                );
+            }
+        }
+    }
+
+    public void setBackgroundImage(Bitmap bitmap) {
+        backgroundImage = bitmap;
+        isBackgroundImageUpdated = true;
+    }
+
+    public void setBackgroundColor(int colorValue) {
+        this.backgroundColor = colorValue;
+        isBackgroundColorUpdated = true;
+    }
+
+    public void setFigureID(int figureID) {
+        this.figureID = figureID;
+    }
+
+    public void setFigureColor(int color) {
+        stickmanPaint.setColor(color);
+    }
+
+    public void setFigureStrokeWidth(float width) {
+        stickmanStrokeWidth = width;
+    }
+
+    public void setFigureAccessory(int accessoryID, int accessoryType) {
+        this.accessoryID = accessoryID;
+        this.accessoryType = accessoryType;
+    }
+
+    public void setVideoEncoder(VideoEncoder encoder) {
+        encoder.setFrameRate(framesPerSecond);
+        this.encoder = encoder;
+    }
+
+    public void setVideoEncoderFrameRate(int frameRate) {
+        encoder.setFrameRate(frameRate);
+    }
+
+    public void clearVideoEncoder() {
+        this.encoder.stopEncoding();
+        this.encoder = null;
+    }
+
+    public void setEncodeStickmanData() {
+        encodeStickmanData = true;
+    }
+}

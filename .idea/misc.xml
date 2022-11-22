@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/activity_closet.xml" value="0.25" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_benefit.xml" value="0.1" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/fragment_closet.xml" value="0.1" />
@@ -17,10 +16,16 @@
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/layout/listview_search_item.xml" value="0.2" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="..\:/CHEUM/BokRim/app/src/main/res/menu/menu_bottom.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/drawable-v24/save_to_video_button_shape.xml" value="0.105" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/drawable-v24/take_photo_button.xml" value="0.1705" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/drawable/button.xml" value="0.269" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.105" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/font/font.xml" value="0.3734375" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/font/nanumgothic.xml" value="0.25925925925925924" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/activity_closet.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/activity_editor.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/activity_vision_camerax_live_preview.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_benefit.xml" value="0.33" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_benefit2.xml" value="0.2875" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_benefit_detail.xml" value="0.14" />
@@ -31,12 +36,19 @@
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_map_parent.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_map_search.xml" value="0.33" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/fragment_place.xml" value="0.17" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/frame_item.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/listview_map_item.xml" value="0.33" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/listview_search_item.xml" value="0.3359375" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/media_item_view.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/option_item.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/recycler_benefit_detail_item.xml" value="0.21" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/recycler_benefit_item.xml" value="0.25" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/recycler_history_item.xml" value="0.22" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/spinner_style.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/layout/toggle_style.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/menu/bottom_menu.xml" value="0.17" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/menu/live_preview_menu.xml" value="0.1" />
+        <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/xml/preference_live_preview_quickstart.xml" value="0.1" />
         <entry key="..\:/Users/User/StudioProjects/BokRim/app/src/main/res/xml/string.xml" value="0.33489583333333334" />
       </map>
     </option>
