@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     Benefit2Fragment benefit2Fragment = new Benefit2Fragment();
     EventFragment eventFragment = new EventFragment();
     PlaceFragment placeFragment = new PlaceFragment();
-    ClosetFragment closetFragment = new ClosetFragment();
     HistoryDetailFragment historyDetailFragment = new HistoryDetailFragment();
 
     MapSearchFragment mapSearchFragment = new MapSearchFragment();
@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, benefitFragment).commit();
                         return true;
                     case R.id.tap_closet:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, closetFragment).commit();
+                        Intent intent = new Intent(MainActivity.this, ClosetActivity.class);
+                        startActivity(intent);
                         return true;
                 }
                 return true;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BokRim</string>
+    <string name="app_name">복, 림</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="더보기"><u>더보기</u></string>
 </resources>
